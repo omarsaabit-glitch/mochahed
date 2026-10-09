@@ -1,1 +1,62 @@
-<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>Admin</title><style>body{background:#111;color:#fff;font-family:system-ui;padding:20px}.box{max-width:400px;margin:50px auto;background:#222;padding:20px;border-radius:12px}input,button{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;box-sizing:border-box}button{background:#ff0050;color:#fff;font-weight:bold}</style></head><body><div class="box" id="login"><h2>دخول الادمن 🔐</h2><input type="password" id="p" placeholder="كلمة السر"><button onclick="if(document.getElementById('p').value=='mochahed123'){document.getElementById('login').style.display='none';document.getElementById('panel').style.display='block'}else alert('غالط')">دخول</button><p style="font-size:12px;color:#888">الباسوورد: mochahed123</p></div><div class="box" id="panel" style="display:none"><h2>زيد فيديو جديد ➕</h2><p>1- طلع الفيديو ل GitHub<br>2- كتب سميتو هنا</p><input id="name" placeholder="مثال: IMG_4403.mov"><input id="title" placeholder="عنوان"><button onclick="add()">اضافة</button><div id="list"></div><button onclick="save()" style="background:#00c851;margin-top:20px">💾 حفظ وتحميل index.html</button></div><script>let vids=JSON.parse(localStorage.getItem('v')||'[{"src":"IMG_4401.mov"}]');function render(){document.getElementById('list').innerHTML=vids.map((v,i)=>`<div style="background:#333;padding:10px;margin:8px 0;border-radius:8px">${v.src} <button onclick="vids.splice(${i},1);localStorage.setItem('v',JSON.stringify(vids));render()" style="background:red;width:auto;padding:4px 8px;float:left">X</button></div>`).join('')}function add(){let n=document.getElementById('name').value;if(!n)return alert('كتب السمية');vids.push({src:n,title:document.getElementById('title').value});localStorage.setItem('v',JSON.stringify(vids));render();document.getElementById('name').value='';alert('تزاد!')}function save(){let h=`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>Mochahed</title><style>body{margin:0;background:#000;color:#fff;font-family:system-ui}.top{text-align:center;padding:20px}.grid{display:grid;gap:15px;padding:15px;max-width:500px;margin:auto}.card{background:#111;border-radius:15px;overflow:hidden}video{width:100%}</style></head><body><div class="top"><h1>Mochahed 🔥</h1><p>مراقب محتوى +18</p></div><div class="grid">`+vids.map(v=>`<div class="card"><video src="${v.src}" controls playsinline></video><div style="padding:10px">${v.title||''}</div></div>`).join('')+`</div></body></html>`;let b=new Blob([h],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='index.html';a.click()}render();</script></body></html>
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin V2 - Catbox</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:system-ui;padding:15px;margin:0}
+.box{max-width:500px;margin:20px auto;background:#1a1a1a;padding:20px;border-radius:16px;border:1px solid #333}
+input,button{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:none;box-sizing:border-box;font-size:16px}
+button{background:#ff0050;color:#fff;font-weight:bold}
+.green{background:#00c851}
+.step{background:#222;padding:12px;border-radius:10px;margin:10px 0;font-size:13px;line-height:1.6}
+a{color:#ff0050}
+</style>
+</head>
+<body>
+<div class="box" id="login">
+<h2>🔐 دخول الادمن</h2>
+<input type="password" id="p" placeholder="كلمة السر">
+<button onclick="if(document.getElementById('p').value=='mochahed123'){document.getElementById('login').style.display='none';document.getElementById('panel').style.display='block';render()}else alert('غالط!')">دخول</button>
+<p style="color:#888;font-size:11px">الباس: mochahed123</p>
+</div>
+
+<div class="box" id="panel" style="display:none">
+<h2>🔥 لوحة تحكم Catbox</h2>
+<div class="step">
+<b>الطريقة الجديدة (200MB):</b><br>
+1- سير لـ <a href="https://catbox.moe" target="_blank">catbox.moe</a><br>
+2- Upload الفيديو<br>
+3- كوبي الرابط والصقو هنا 👇
+</div>
+<input id="url" placeholder="https://files.catbox.moe/xxxx.mp4">
+<input id="title" placeholder="عنوان الفيديو">
+<button onclick="add()">➕ اضافة للموقع</button>
+<div id="list" style="margin-top:20px"></div>
+<button onclick="save()" class="green" style="margin-top:20px">💾 حفظ وتحميل index.html</button>
+</div>
+
+<script>
+let vids=JSON.parse(localStorage.getItem('v2')||'[]');
+function render(){
+document.getElementById('list').innerHTML=vids.map((v,i)=>`<div style="background:#222;padding:10px;margin:8px 0;border-radius:10px"><div style="font-size:10px;color:#0f0;word-break:break-all">${v.src}</div><div>${v.title||''}</div><video src="${v.src}" controls style="width:100%;height:120px;margin-top:5px"></video><button onclick="vids.splice(${i},1);localStorage.setItem('v2',JSON.stringify(vids));render()" style="background:#ff3333;padding:6px">حذف</button></div>`).join('')||'<p style="color:#666">باقي ما زدتي والو</p>';
+}
+function add(){
+let u=document.getElementById('url').value.trim();
+if(!u)return alert('الصق رابط Catbox!');
+vids.push({src:u,title:document.getElementById('title').value});
+localStorage.setItem('v2',JSON.stringify(vids));
+document.getElementById('url').value='';
+document.getElementById('title').value='';
+render();alert('تزاد! دابا دير حفظ لتحت');
+}
+function save(){
+if(vids.length==0)return alert('زيد فيديو أولا');
+let h=`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mochahed 🔥</title><style>body{margin:0;background:#000;color:#fff;font-family:system-ui}.top{text-align:center;padding:30px;background:linear-gradient(180deg,#1a1a1a,#000)}.grid{display:grid;gap:16px;padding:15px;max-width:500px;margin:auto}.card{background:#111;border-radius:16px;overflow:hidden;border:1px solid #222}video{width:100%;background:#000}</style></head><body><div class="top"><h1>Mochahed 🔥</h1><p>محتوى حصري +18</p></div><div class="grid">`+vids.map(v=>`<div class="card"><video src="${v.src}" controls playsinline preload="metadata"></video><div style="padding:12px">${v.title||''}</div></div>`).join('')+`</div></body></html>`;
+let b=new Blob([h],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='index.html';a.click();
+}
+render();
+</script>
+</body>
+</html>
