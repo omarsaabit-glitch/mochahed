@@ -2,24 +2,34 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mochahed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>موحى شاهد 🔥</title>
 <style>
-body{margin:0;background:#0f141e;color:#fff;font-family:sans-serif;text-align:center}
-.top{padding:30px 20px}
-.card{max-width:400px;margin:20px auto;background:#1a2332;padding:15px;border-radius:15px;border:1px solid #2a3a50}
-video{width:100%;border-radius:12px;background:#000;min-height:200px}
+body{background:#0a0a0a;color:#fff;font-family:system-ui;text-align:center;padding:20px}
+h1{color:#ff0055}
+.video-box{max-width:800px;margin:20px auto;background:#1a1a1a;padding:15px;border-radius:15px}
+video{width:100%;border-radius:10px;background:#000}
+a.btn{display:inline-block;background:#ff0055;color:#fff;padding:12px 25px;border-radius:25px;text-decoration:none;margin:10px}
 </style>
 </head>
 <body>
-<div class="top"><h1>🔥 Mochahed</h1><p>18+ افلام و فيديوهات خاصة</p></div>
-<div class="card">
-<video controls playsinline preload="metadata" crossorigin="anonymous">
-<source src="https://files.catbox.moe/f0fy68.mov" type="video/quicktime">
-<source src="https://files.catbox.moe/f0fy68.mov" type="video/mp4">
-</video>
-<p>🔥 فيديو 1</p>
-</div>
-<p style="margin-top:30px;opacity:0.5">اضغط على الفيديو للتشغيل</p>
+<h1>🔥 موحى شاهد 🔥</h1>
+<div id="videos"></div>
+<script>
+const videos=[
+"https://files.catbox.moe/5be7je.mp4"
+];
+const container=document.getElementById('videos');
+videos.forEach(url=>{
+const ext=url.split('.').pop().toLowerCase();
+const type=ext==='mov'?'video/quicktime':'video/mp4';
+container.innerHTML+=`
+<div class="video-box">
+<video controls playsinline><source src="${url}" type="${type}">المتصفح ديالك ما كيدعمش الفيديو</video>
+<p>${url.split('/').pop()}</p>
+</div>`;
+});
+</script>
+<p><a class="btn" href="/admin.html">🔒 لوحة التحكم</a></p>
 </body>
 </html>
